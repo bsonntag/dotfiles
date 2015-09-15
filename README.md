@@ -1,19 +1,20 @@
-# Group Buddies dotfiles
+# My dotfiles, based on Subvisual's
+
+These are my personal dotfiles, forked off [Subvisual's dotfiles](https://github.com/subvisual/dotfiles).
 
 ## Requirements
 
-Our dotfiles assume you're using `zsh`, set it as your login shell:
+These dotfiles assume you're using `zsh`, set it as your login shell:
 
     chsh -s $(which zsh)
 
 ## Install
 
+Install [rcm](https://github.com/thoughtbot/rcm).
+
 Clone onto your laptop:
 
-    git clone git://github.com/groupbuddies/dotfiles.git
-Install [rcm](https://github.com/thoughtbot/rcm):
-
-    brew bundle dotfiles/Brewfile
+    git clone git://github.com/bsonntag/dotfiles.git
 
 Configure:
 
@@ -52,22 +53,16 @@ For example, your `~/.aliases.local` might look like this:
     # Productivity
     alias ego_boost='echo "You're awesome"'
 
-Your `~/.gitconfig.local` might look like this:
-
-    [user]
-      name = Luís Zamith
-      email = zamith@groupbuddies.com
-
 ## Credits
 
-Thank you, [contributors](https://github.com/groupbuddies/dotfiles/contributors)!
+Thank you, [contributors](https://github.com/subvisual/dotfiles/contributors)!
 Also, thank you to thoughtbot from whom we've gotten so much inspiration for this
 dotfiles.
 
-![groupbuddies](http://www.groupbuddies.com/logo.png)
+![Subvisual](https://avatars1.githubusercontent.com/u/1085467?v=3&s=200)
 
-Dotfiles is maintained by [Group Buddies](http://groupbuddies.com)
-The names and logos for Group Buddies are trademarks of GB-Software As A Service, Lda.
+Dotfiles is maintained by [Subvisual](http://subvisual.co)
+The names and logos for Subvisual are trademarks of GB-Software As A Service, Lda.
 
 This guides are Â© 2014 GB-Software As A Service, Lda. It is free software and may be
 redistributed under the terms specified in the [LICENSE](LICENSE) file.

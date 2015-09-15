@@ -1,19 +1,24 @@
+[user]
+    name = Benjamim Sonntag
+    email = benjamimsonntag@gmail.com
 [alias]
     lg = log --color --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(blue)[%an]%Creset' --abbrev-commit
     conflicts = diff --name-only --diff-filter=U
-    delete = branch -D
     co = checkout
     ct = commit -v
+    bd = branch -D
+    bl = branch --list
     br = checkout -b
 [push]
     default = current
 [color]
     ui = true
 [core]
+    editor = vim
     excludesfile = ~/.gitignore
 [commit]
     template = ~/.gitcommit
 [include]
     path = .gitconfig.local
 [credential]
-	helper = cache
+    helper = cache

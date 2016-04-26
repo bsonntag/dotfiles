@@ -1,7 +1,9 @@
 #Basics
 alias la="ls -A"
-alias ls="ls -Gh --color --group-directories-first"
 alias ll="ls -l"
+alias ls="ls -Gh --color --group-directories-first"
+alias lsa="ls -lA"
+alias rmr="rm -rf"
 
 # Alias for RoR
 alias r="rails"
@@ -9,12 +11,22 @@ alias migrate="bundle exec rake db:migrate && bundle exec rake db:migrate RAILS_
 alias rollback="bundle exec rake db:rollback && bundle exec rake db:rollback RAILS_ENV=test"
 
 # Alias for git
+alias ga.="git add ."
+alias gdm="git diff master"
+alias gfr="gfo && gro"
 alias glg="git lg"
+alias gro="git rebase origin/master"
 alias gst="git status -sb"
 
 # Alias for node and npm
 alias nt="npm test"
-alias ns="node start"
+alias ns="npm start"
+
+# Alias for tmux
+alias t="tmux"
+alias ta="tmux attach -t"
+alias tl="tmux ls"
+alias tn="tmux new -s"
 
 # Writing less
 alias b='bundle'

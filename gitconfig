@@ -2,13 +2,16 @@
     name = Benjamim Sonntag
     email = benjamimsonntag@gmail.com
 [alias]
-    lg = log --color --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(blue)[%an]%Creset' --abbrev-commit
-    conflicts = diff --name-only --diff-filter=U
-    co = checkout
-    ct = commit -v
     bd = branch -D
     bl = branch --list
     br = checkout -b
+    co = checkout
+    conflicts = diff --name-only --diff-filter=U
+    cpr = close-pull-request
+    ct = commit -v
+    hard-reset = reset --hard
+    lg = log --color --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(blue)[%an]%Creset' --abbrev-commit
+    rpo = remote prune origin
 [push]
     default = current
 [color]

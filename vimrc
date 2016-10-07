@@ -13,7 +13,7 @@ set ignorecase    " case insensitive searching
 set smartcase     " overrides ignorecase when pattern contains caps
 set scrolloff=6   " Show 3 lines of context around the cursor.
 set laststatus=2  " Always display the status line
-set encoding=utf-8
+set encoding=utf8
 set backspace=indent,eol,start
 set splitright
 set splitbelow
@@ -64,6 +64,8 @@ Plugin 'gmarik/vundle'
 Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
+"Plugin 'ryanoasis/vim-devicons'
+"Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'tpope/vim-projectionist'
@@ -78,7 +80,7 @@ Plugin 'vim-scripts/greplace.vim'
 Plugin 'unblevable/quick-scope'  
 
 Plugin 'digitaltoad/vim-jade'
-Plugin 'gabrielpoca/vim-coffee-script'
+"Plugin 'gabrielpoca/vim-coffee-script'
 Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
 "Plugin 'juvenn/mustache.vim'
@@ -203,8 +205,8 @@ let g:rainbow_conf = {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:syntastic_async=1
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_scss_checkers = ['scss_lint']
+let g:syntastic_javascript_checkers = [''] "['eslint']
+let g:syntastic_scss_checkers = ['']
 let g:syntastic_html_checkers=['']
 let g:syntastic_slim_checkers=['']
 "let g:syntastic_mode_map = { 'passive_filetypes': ['sass', 'scss'] }
@@ -411,7 +413,7 @@ nnoremap Q :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 if has("gui_running")
   "colorscheme base16-ashes
-  set guifont=Inconsolata-dz\ for\ Powerline:h13
+  set guifont=Inconsolata-dz\ Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
   set guioptions=egmrt
   set guioptions-=r
   set noeb vb t_vb=

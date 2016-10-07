@@ -1,4 +1,6 @@
 #Basics
+alias curdir="basename `pwd`"
+alias hist-find="history | grep"
 alias la="ls -A"
 alias ll="ls -l"
 alias ls="ls -Gh --color --group-directories-first"
@@ -19,14 +21,16 @@ alias gro="git rebase origin/master"
 alias gst="git status -sb"
 
 # Alias for node and npm
-alias nt="npm test"
+alias nr="npm run -s"
 alias ns="npm start"
+alias nt="npm test -s"
 
 # Alias for tmux
 alias t="tmux"
 alias ta="tmux attach -t"
 alias tl="tmux ls"
 alias tn="tmux new -s"
+alias tw="tmux-work"
 
 # Writing less
 alias b='bundle'

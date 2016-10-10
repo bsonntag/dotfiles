@@ -89,8 +89,8 @@ Plugin 'moll/vim-node'
 Plugin 'othree/html5.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'slim-template/vim-slim'
-Plugin 'tpope/vim-rails'
-Plugin 'vim-ruby/vim-ruby'
+"Plugin 'tpope/vim-rails'
+"Plugin 'vim-ruby/vim-ruby'
 
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/neosnippet'
@@ -103,7 +103,9 @@ Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-surround'
 
 Plugin 'benmills/vimux'
-Plugin 'bling/vim-airline'
+"Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'duff/vim-scratch'
 Plugin 'jgdavey/tslime.vim'
@@ -135,7 +137,7 @@ set t_Co=256
 "let base16colorspace=256
 
 let g:hybrid_use_Xresources = 1
-colorscheme hybrid
+"colorscheme hybrid
 
 " clipboard
 set clipboard=unnamed

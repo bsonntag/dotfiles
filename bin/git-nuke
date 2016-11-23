@@ -1,0 +1,7 @@
+#!/bin/bash
+
+branch=$1
+destiny=${2:-master}
+git checkout $destiny
+git push --delete origin $branch > /dev/null
+git branch -D $branch

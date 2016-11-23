@@ -1,0 +1,18 @@
+#!/bin/bash
+
+dirname=${1:-${PWD##*/}}
+
+tmux -2 new-session -d -s $dirname
+
+tmux new-window -t $dirname:1
+tmux split-window -h
+
+tmux select-window -t $dirname:0
+#tmux split-window -v
+#tmux resize-pane -D 20
+
+#tmux select-pane -t 0
+tmux send-keys "vim" C-m
+tmux send-keys " n"
+
+tmux -2 attach-session -t $dirname

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+current=$(git branchname)
+destiny=${1:-master}
+
+echo "...fetching..."
+git fetch
+
+echo "...rebasing ${destiny}..."
+git checkout $destiny
+[[ $? == 0 ]] || exit "failed to switch to $destiny"
+git rebase "origin/${destiny}"
+
+echo "...rebasing ${current} with ${destiny}..."
+git checkout $current
+git rebase -i $destiny
+
+echo "...updating origin/${current}..."
+git push -f
+
+echo "...merging..."
+git checkout $destiny
+git merge --ff-only $current
+
+echo "...updating origin/${destiny}..."
+git push
+
+echo "...deleting ${current}..."
+[[ $(git diff $current..$destiny) == "" ]] && git nuke $current $destiny

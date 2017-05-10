@@ -1,0 +1,399 @@
+
+set nowritebackup
+set noshowcmd     " show (partial) command in the last line of the screen
+set noshowmode    " powerline shows the mode
+set scrolloff=6   " Show 6 lines of context around the cursor.
+set laststatus=2  " Always display the status line
+set splitright
+set splitbelow
+"set nofoldenable
+set mouse=a
+set lazyredraw    " to avoid scrolling problems
+"set ttymouse=xterm2
+set relativenumber
+"set guicursor+=a:blinkon0
+set history=1000
+set undofile
+set undodir=~/.vim/undo
+set complete-=i   " Searching includes can be slow
+set iskeyword-=-
+set hlsearch
+
+" don't render italic, bold, links in HTML
+let html_no_rendering=1
+
+"syntax enable
+set t_ut=
+set background=dark
+set t_Co=256
+let base16colorspace=256
+
+let g:hybrid_use_Xresources = 1
+colorscheme hybrid
+
+if has("gui_running")
+  "colorscheme base16-ashes
+  set guifont=Inconsolata-dz\ Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
+  set guioptions=egmrt
+  set guioptions-=r
+  set noeb vb t_vb=
+else
+  set synmaxcol=128
+endif
+
+set clipboard=unnamed
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => QuickScope
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Insert into your .vimrc after quick-scope is loaded.
+" Obviously depends on <https://github.com/unblevable/quick-scope> being installed.
+
+function! Quick_scope_selective(movement)
+  let needs_disabling = 0
+  if !g:qs_enable
+    QuickScopeToggle
+    redraw
+    let needs_disabling = 1
+  endif
+
+  let letter = nr2char(getchar())
+
+  if needs_disabling
+    QuickScopeToggle
+  endif
+
+  return a:movement . letter
+endfunction
+
+let g:qs_enable = 0
+
+nnoremap <expr> <silent> f Quick_scope_selective('f')
+nnoremap <expr> <silent> F Quick_scope_selective('F')
+nnoremap <expr> <silent> t Quick_scope_selective('t')
+nnoremap <expr> <silent> T Quick_scope_selective('T')
+vnoremap <expr> <silent> f Quick_scope_selective('f')
+vnoremap <expr> <silent> F Quick_scope_selective('F')
+vnoremap <expr> <silent> t Quick_scope_selective('t')
+vnoremap <expr> <silent> T Quick_scope_selective('T')
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => airline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:airline_powerline_fonts = 1
+let g:airline_theme='base16'
+let g:airline_section_z=''
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => react
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:jsx_ext_required = 0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Flow
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:javascript_plugin_flow = 1
+let g:flow#autoclose = 1
+let g:flow#errjmp = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => rainbow
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let rainbow_colors = ['214','160','DarkGreen','DarkBlue','DarkRed']
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+      \   'ctermfgs': rainbow_colors
+      \}
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""a
+" => syntastic
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"let g:syntastic_always_populate_loc_list = 1
+""let g:syntastic_auto_loc_list = 1
+""let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 1
+"
+"let g:syntastic_async=1
+"let g:syntastic_javascript_checkers=['eslint', 'flow']
+"let g:syntastic_scss_checkers=['']
+let g:syntastic_html_checkers=['']
+"let g:syntastic_slim_checkers=['']
+""let g:syntastic_mode_map = { 'passive_filetypes': ['sass', 'scss'] }
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""a
+" => ALE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ctrlp
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+map <Leader>p :CtrlP<cr>
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_working_path_mode = 'ar'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/bower_components/*
+set wildignore+=*/platforms/android/*,*/platforms/ios/*,*/bower_components/*
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_dont_split = 'nerdtree'
+let g:multiedit_nomappings = 1
+let g:ctrlp_use_caching = 0
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  unlet g:ctrlp_user_command
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_use_caching = 0
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ack
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep --smart-case --nogroup --nocolor --column'
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let NERDTreeWinPos='left'
+let g:nerdtree_tabs_smart_startup_focus = 2
+let g:nerdtree_tabs_open_on_gui_startup = 0
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+map <silent> <Leader>n :NERDTreeToggle<cr>
+map <silent> <Leader>k :NERDTreeFocus<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => HTML5
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:html5_microdata_attributes_complete = 0
+let g:html5_aria_attributes_complete = 0
+let g:html5_rdfa_attributes_complete = 0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Neocomplete
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Disable AutoComplPop.
+set completeopt-=preview
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 1
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+if !exists('g:neocomplete#keyword_patterns')
+  let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+
+function! s:my_cr_function()
+  return neocomplete#close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+if !exists('g:neocomplete#sources#omni#functions')
+  let g:neocomplete#sources#omni#functions = {}
+endif
+
+"let g:neocomplete#sources#omni#functions.javascript = 'tern#Complete'
+let g:neocomplete#sources#omni#input_patterns.javascript = '\h\w*\|[^. \t]\.\w*'
+
+"let g:tern#is_show_argument_hints_enabled = 0
+"let g:tern_show_signature_in_pum = 1
+"let g:tern_map_keys = 0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Neosnippet
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Deoplete
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+"" Disable AutoComplPop.
+"set completeopt=longest,menuone
+"set completeopt-=preview
+""let g:acp_enableAtStartup = 0
+"let g:deoplete#enable_at_startup = 1
+"let g:deoplete#enable_smart_case = 1
+"let g:deoplete#syntax#min_keyword_length = 1
+""let g:deoplete#lock_buffer_name_pattern = '\*ku\*'
+"
+""if !exists('g:deoplete#keyword_patterns')
+"  "let g:deoplete#keyword_patterns = {}
+""endif
+""let g:deoplete#keyword_patterns['default'] = '\h\w*'
+"
+"" Plugin key-mappings.
+"inoremap <expr><C-g>     deoplete#undo_completion()
+"inoremap <expr><C-l>     deoplete#refresh()
+"
+"" <CR>: close popup and save indent.
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"
+"function! s:my_cr_function() abort
+"  return deoplete#close_popup() . "\<CR>"
+"endfunction
+"
+"" <TAB>: completion.
+"autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+"let g:UltiSnipsExpandTrigger="<C-j>"
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"
+"" <C-h>, <BS>: close popup and delete backword char.
+"inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><C-y> deoplete#close_popup()
+"inoremap <expr><C-e> deoplete#cancel_popup()
+"
+"" Enable heavy omni completion.
+"if !exists('g:deoplete#omni#input_patterns')
+"  let g:deoplete#omni#input_patterns = {}
+"endif
+"if !exists('g:deoplete#omni#functions')
+"  let g:deoplete#omni#functions = {}
+"endif
+"
+"let g:deoplete#omni#functions.javascript = [
+"  \ 'tern#Complete',
+"  \ 'jspc#omni'
+"\]
+"let g:deoplete#omni#input_patterns.javascript = '\h\w*\|[^. \t]\.\w*'
+"
+"let g:tern#command = ['tern']
+"let g:tern#arguments = ['--persistent']
+""let g:tern#is_show_argument_hints_enabled = 0
+"let g:tern_show_signature_in_pum = 1
+""let g:tern_map_keys = 0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => OMNI
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"autocmd BufRead,BufNewFile *.es6 setfiletype javascript
+autocmd FileType css,scss,sass setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType javascript setlocal omnifunc=tern#Complete
+"autocmd FileType javascript syntax clear jsFuncBlock
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd BufRead,BufNewFile *.ru setfiletype ruby
+autocmd BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setf markdown
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ListToggle
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:lt_location_list_toggle_map = '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
+
+
+" -------------------------------------------------------------------
+" -------------------------------------------------------------------
+"
+" SHORTCUTS
+"
+" -------------------------------------------------------------------
+" -------------------------------------------------------------------
+
+" VIMUX
+map <Leader>rp :VimuxPromptCommand<CR>
+map <Leader>rl :VimuxRunLastCommand<CR>
+map <Leader>ri :VimuxInspectRunner<CR>
+map <Leader>rx :VimuxCloseRunner<CR>
+map <Leader>rs :VimuxInspectRunner<CR>
+
+" TERN
+"map <Leader>td :TernDef
+"map <Leader>tt :TernDefPreview
+"map <Leader>tr :TernRefs
+"map <Leader>te :TernRename
+
+" PULL REQUEST
+" change all commits to squash except for the first
+"map <Leader>prs mzggjvG$:s/^pick/s<CR>
+
+" SAVE
+" Use ctrl-s to save in any mode
+map <C-s> :w<CR>
+imap <C-s> <Esc>:w<CR>
+nmap <C-s> <Esc>:w<CR>
+
+" SPLIT
+" move to split
+nmap <silent> <C-k> :wincmd k<CR>
+nmap <silent> <C-j> :wincmd j<CR>
+nmap <silent> <C-h> :wincmd h<CR>
+nmap <silent> <C-l> :wincmd l<CR>
+
+" BACKGROUND
+map <silent> <leader>bd :set background=dark<cr>
+map <silent> <leader>bl :set background=light<cr>
+
+" SEARCH
+" Hide highlighted terms
+map <silent> <leader><cr> :noh<cr>
+
+" Paste in paste mode
+map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
+
+" maps jk to esc
+inoremap jk <esc>
+
+" move to end and begining of line
+nnoremap H 0
+nnoremap L $
+
+" search word under curso
+nnoremap Q :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
